@@ -47,13 +47,27 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.sha }}
 
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Send Email on Failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
         with:
-          args: >
-            -Dsonar.projectKey=chiranjeevi-job
-            -Dsonar.organization=makam-chiranjeevi
-            -Dsonar.sources=.
-            -Dsonar.host.url=https://sonarcloud.io
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "CI Pipeline Failed: ${{ github.repository }}"
+          body: "The CI workflow for commit ${{ github.sha }} has failed. Check the GitHub Actions logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+      - name: Send Email on Success
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "CI Pipeline Succeeded: ${{ github.repository }}"
+          body: "The CI workflow for commit ${{ github.sha }} has completed successfully. See details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: ${{ secrets.EMAIL_USERNAME }}
