@@ -1,0 +1,21 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code ckeckout
+        uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: install dependencies
+        run: npm install
+      - name: build project
+        run: npm run build
+      - name: lint code
+        run: npm run lint
