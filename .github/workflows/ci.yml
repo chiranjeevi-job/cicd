@@ -46,3 +46,10 @@ jobs:
 
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.sha }}
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarcloud-github-action@v2
+        with:
+          projectKey: chirajeevi-job
+          organization: makam chiranjeevi
+          token: ${{ secrets.SONAR_TOKEN }}
