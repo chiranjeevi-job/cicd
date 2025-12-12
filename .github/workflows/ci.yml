@@ -38,6 +38,11 @@ jobs:
           exit-code: 1
           ignore-unfixed: true
 
+      - name: Install Docker Scout
+        run: |
+          curl -fsSL https://desktop.docker.com/linux/main/amd64/docker-scout-cli.tgz | tar -xz -C /usr/local/bin
+          docker scout version
+
       - name: Docker Scout Scan
         run: docker scout cves ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.sha }}
 
