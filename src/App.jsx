@@ -33,6 +33,10 @@ function App() {
       <p>added development branch</p>
       <p>hello</p>
       <p>product branch is added</p>
+      <p>test explore</p>
+      <p>check version</p>
+      <p>test function</p>
+      <p>product2</p>
     </>
   );
 }
