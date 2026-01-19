@@ -32,6 +32,7 @@ function App() {
       <p>product branch is added</p>
       <p>test explore</p>
       <p>check version</p>
+      <p>test function</p>
     </>
   );
 }
