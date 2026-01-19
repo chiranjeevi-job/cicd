@@ -33,6 +33,7 @@ function App() {
       <p>test explore</p>
       <p>check version</p>
       <p>test function</p>
+      <p> product1</p>
       <p>product2</p>
     </>
   );
