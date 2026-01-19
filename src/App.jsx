@@ -29,7 +29,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <p>makam chiranjeevi shetty</p>
-      <p>git practice is happening</p>
+      <p>product branch is added</p>
     </>
   );
 }
